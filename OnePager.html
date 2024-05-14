@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="OnePager.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="Grid-Container">
+        <div class="Grid Item-1">
+            <!-- Advertisement Modal -->
+            <div id="advertisementModal" class="advertisement">
+                <span class="close-btn" onclick="moveAdvertisement()">X</span>
+                <p>This is your annoying advertisement!</p>
+            </div>
+
+            <!-- Cursor Chaser -->
+            <div id="cursorChaser"></div>
+        </div>
+        <div class="Grid Item-2"><img class="Iphone" src="/IMG/iphone.png"></div>
+        <div class="Grid Item-3"><img class="Logo" src="/IMG/logo.svg">
+            <h1>Daily tappable tech news<br>and stories</h1>
+            <p class="text">Every weekday Sip Surfaces the most interesting and important tech stories of the day,
+                from breaking news to profiles on favorite tech products</p>
+            <img class="ios" src="/IMG/download-ios.svg">
+            <img class="android" src="/IMG/download-android.svg">
+        </div>
+        <div class="Grid Item-4">
+            <p class="stext"><mark>news is built by Product Hunt and its awesome community</mark></p>
+        </div>
+    </div>
+
+    <script>
+
+        var adCloseCount = 0;
+
+        // Advertisement JavaScript
+        function moveAdvertisement() {
+            var modal = document.getElementById('advertisementModal');
+            var newPosition = getRandomPosition();
+
+            modal.style.top = newPosition.top + 'px';
+            modal.style.left = newPosition.left + 'px';
+
+            adCloseCount++;
+
+            // Check if the advertisement has been closed 5 times
+            if (adCloseCount % 5 === 0) {
+                window.open('https://www.youtube.com/watch?v=kffacxfA7G4', '_blank');
+            }
+        }
+
+        function getRandomPosition() {
+            var bodyRect = document.body.getBoundingClientRect();
+            var modalRect = document.getElementById('advertisementModal').getBoundingClientRect();
+
+            var maxX = bodyRect.width - modalRect.width;
+            var maxY = bodyRect.height - modalRect.height;
+
+            var randomX = Math.floor(Math.random() * maxX);
+            var randomY = Math.floor(Math.random() * maxY);
+
+            return { top: randomY, left: randomX };
+        }
+
+        // Cursor Chaser JavaScript
+        document.addEventListener("mousemove", function (event) {
+            const cursorChaser = document.getElementById("cursorChaser");
+            cursorChaser.style.left = event.pageX + "px";
+            cursorChaser.style.top = event.pageY + "px";
+        });
+
+        // Display the advertisement without delay
+        document.getElementById('advertisementModal').style.display = 'block';
+    </script>
+
+</body>
+
+</html>
